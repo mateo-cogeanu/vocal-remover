@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Vocal Remover</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <section>
+      <h2>Model</h2>
+      <div id="models" class="models" role="radiogroup" aria-label="Model"></div>
+      <div id="ensemble" class="ensemble">
+        <label class="toggle">
+          <span class="toggle-text">
+            <span class="toggle-title">Ensemble</span>
+            <span class="toggle-sub">Average with a second model for cleaner results</span>
+          </span>
+          <input id="ensembleOn" type="checkbox" role="switch">
+          <span class="switch" aria-hidden="true"></span>
+        </label>
+        <div id="ensembleWith" class="ensemble-with" role="radiogroup" aria-label="Second model"></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Keep</h2>
+      <div id="stems" class="chips"></div>
+    </section>
+
+    <section id="toolsSec">
+      <h2>Vocal extras</h2>
+      <div id="tools" class="toggles"></div>
+    </section>
+
+    <section>
+      <h2>Format</h2>
+      <div id="format" class="segmented" role="radiogroup" aria-label="Format">
+        <button data-v="WAV">WAV</button>
+        <button data-v="FLAC">FLAC</button>
+        <button data-v="MP3">MP3</button>
+      </div>
+    </section>
+
+    <section>
+      <h2>Save to</h2>
+      <button id="outBtn" class="path" title="Change folder">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 3.5a1 1 0 0 1 1-1h3.6l1.4 1.5h6a1 1 0 0 1 1 1v7.5a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1z"/></svg>
+        <span id="outPath"></span>
+      </button>
+    </section>
+  </aside>
+
+  <main class="main">
+    <div id="setup" class="setup" hidden>
+      <div class="setup-head">
+        <div class="setup-text">
+          <div class="setup-title">Download models</div>
+          <div id="setupSub" class="setup-sub"></div>
+        </div>
+        <button id="dlBtn" class="btn primary">Download all</button>
+      </div>
+      <ul id="dlList" class="dl-list" hidden></ul>
+    </div>
+    <div id="empty" class="drop">
+      <div class="drop-inner">
+        <svg class="drop-icon" viewBox="0 0 48 48" aria-hidden="true">
+          <path d="M18 34V12l20-4v22"/><circle cx="13" cy="34" r="5"/><circle cx="33" cy="30" r="5"/>
+        </svg>
+        <p class="drop-title">Drop songs here</p>
+        <p class="drop-sub">or folders. MP3, WAV, FLAC, M4A and more</p>
+        <button id="chooseBtn" class="btn">Choose files…</button>
+      </div>
+    </div>
+
+    <div id="queueWrap" class="queue-wrap" hidden>
+      <header class="queue-head">
+        <span id="queueCount"></span>
+        <div class="queue-actions">
+          <button id="addBtn" class="link">Add files</button>
+          <button id="clearBtn" class="link">Clear</button>
+        </div>
+      </header>
+      <ul id="queue" class="queue"></ul>
+    </div>
+
+    <div id="banner" class="banner" hidden></div>
+
+    <footer class="bar">
+      <div id="player" class="player" hidden>
+        <button id="playBtn" class="icon-btn" aria-label="Play or pause">
+          <svg class="i-play" viewBox="0 0 16 16"><path d="M4 2.5v11l9.5-5.5z"/></svg>
+          <svg class="i-pause" viewBox="0 0 16 16"><path d="M4 2.5h3v11H4zM9 2.5h3v11H9z"/></svg>
+        </button>
+        <div class="player-meta">
+          <div id="playerTitle" class="player-title"></div>
+          <input id="seek" type="range" min="0" max="1000" value="0" aria-label="Seek">
+        </div>
+        <span id="playerTime" class="player-time">0:00</span>
+      </div>
+      <span id="status" class="status"></span>
+      <button id="goBtn" class="btn primary" disabled>Separate</button>
+    </footer>
+    <audio id="audio" preload="auto"></audio>
+  </main>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
